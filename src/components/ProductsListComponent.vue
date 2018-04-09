@@ -42,10 +42,7 @@
             }
         },
         created: function () {
-            console.log(this.$http)
             this.getData()
-            let randomArray = (length, max) => [...new Array(length)].map(() => Math.round(Math.random() * max))
-            console.log('randomArray', randomArray(4, 10))
         },
         components: {
             ProductItemComponent,
@@ -98,7 +95,6 @@
                         productsListArr.push(itemVal)
                     })
                 })
-                console.log('productsListArr', productsListArr)
                 this.productsList = productsListArr
             },
             removeProduct: function (idDel) {
