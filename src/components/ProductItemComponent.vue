@@ -1,7 +1,7 @@
 <template>
     <li>
         <div class="product-panel">
-            <button class="btn-remove" v-bind:data-sku="product.sku" v-on:click="removeProduct(product.sku)">
+            <button class="btn-remove" v-bind:data-id="product.id" v-on:click="removeProduct(product.id)">
                 <i class="material-icons">close</i>
             </button>
             <div class="row">
@@ -16,10 +16,10 @@
                 </span>
                 <span v-else>{{product.price.value}} PLN</span>
             </div>
-            <button class="btn btn-cart" v-bind:data-sku="product.sku" v-on:click="addToCart(product.sku)">
+            <button class="btn btn-cart" v-bind:data-id="product.id" v-on:click="addToCart(product.id)">
                 koszyk
             </button>
-            <button class="btn btn-wishlist" v-bind:data-sku="product.sku" v-on:click="addToWish(product.sku)">
+            <button class="btn btn-wishlist" v-bind:data-id="product.id" v-on:click="addToWish(product.id)">
                 wishlist
             </button>
         </div>
@@ -38,14 +38,14 @@ export default {
     },
     props: ['product'],
     methods: {
-        removeProduct: function (sku) {
-            this.$emit('removeProduct', sku)
+        removeProduct: function (id) {
+            this.$emit('removeProduct', id)
         },
-        addToCart: function (sku) {
-            this.$emit('addToCart', sku)
+        addToCart: function (id) {
+            this.$emit('addToCart', id)
         },
-        addToWish: function (sku) {
-            this.$emit('addToWish', sku)
+        addToWish: function (id) {
+            this.$emit('addToWish', id)
         }
     }
 }

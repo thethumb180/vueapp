@@ -42,7 +42,10 @@
             }
         },
         created: function () {
+            console.log(this.$http)
             this.getData()
+            let randomArray = (length, max) => [...new Array(length)].map(() => Math.round(Math.random() * max))
+            console.log('randomArray', randomArray(4, 10))
         },
         components: {
             ProductItemComponent,
@@ -77,7 +80,7 @@
                     snap.forEach(function (item) {
                         let itemVal = item.val()
                         itemVal['informations'] = []
-                        for (let i = 0; i < counterAttr; i++) {
+                        for (var i = 0; i < counterAttr; i++) {
                             let attrNames = ''
                             if (itemVal.attributes[i]) {
                                 let itemProdVal = itemVal.attributes[i].split('|')
@@ -87,20 +90,26 @@
                                 })
                             }
                         }
+                        if (i === counterAttr) {
+                            let randomArray = (length, max) => [...new Array(length)].map(() => Math.round(Math.random() * max))
+                            let newArr = randomArray(4, 9).join('')
+                            itemVal['id'] = itemVal.sku + newArr
+                        }
                         productsListArr.push(itemVal)
                     })
                 })
+                console.log('productsListArr', productsListArr)
                 this.productsList = productsListArr
             },
-            removeProduct: function (skuDel) {
-                this.productsList = this.productsList.filter(el => el['sku'] !== skuDel)
+            removeProduct: function (idDel) {
+                this.productsList = this.productsList.filter(el => el['id'] !== idDel)
             },
-            addToCart: function (skuCart) {
-                let itemCart = this.productsList.filter(el => el['sku'] === skuCart)
+            addToCart: function (idCart) {
+                let itemCart = this.productsList.filter(el => el['id'] === idCart)
                 this.cartList.push(itemCart['0'])
             },
-            addToWish: function (skuWishlist) {
-                let itemWish = this.productsList.filter(el => el['sku'] === skuWishlist)
+            addToWish: function (idWishlist) {
+                let itemWish = this.productsList.filter(el => el['id'] === idWishlist)
                 this.wishList.push(itemWish['0'])
             }
         }
